@@ -1,0 +1,39 @@
+((=-
+copy this template to folder ~/jupyter-env/lib/python3.7/site-packages/nbconvert/templates/latex
+or create a symbolic link there
+-=))
+
+((=- Default to the notebook output style -=))
+((*- if not cell_style is defined -*))
+    ((* set cell_style = 'style_jupyter.tplx' *))
+((*- endif -*))
+
+((=- Inherit from the specified cell style. -=))
+((* extends cell_style *))
+
+
+%===============================================================================
+% Latex Article
+%===============================================================================
+
+% Document title
+((* block title -*))
+((*- set nb_title = nb.metadata.get('title', '') or resources['metadata']['name'] -*))
+\title{\textbf{\textsf{((( nb_title | escape_latex )))}}}
+((*- endblock title *))
+
+((* block abstract -*))
+((*- set nb_abstract = nb.metadata.get('abstract', '') -*))
+\begin{abstract}
+((( nb_abstract )))
+\end{abstract}
+((*- endblock abstract *))
+
+((* block predoc *))
+    ((( super() )))
+    ((* block tableofcontents *))\tableofcontents((* endblock tableofcontents *))
+((* endblock predoc *))
+
+((*- block docclass -*))
+\documentclass [oneside,10pt,a4paper,ngerman,BCOR10mm,headsepline,parindent,final]{scrartcl}
+((*- endblock docclass -*))
