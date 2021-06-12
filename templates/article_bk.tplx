@@ -86,8 +86,17 @@ or create a symbolic link there
     \pagestyle{empty}
 
     \maketitle\thispagestyle{empty}
-
+    
     \vfill
+    
+    ((*- if nb.metadata["latex_metadata"]: -*))
+    ((*- if nb.metadata["latex_metadata"]["cover_image"]: -*))
+        \begin{center}
+        \includegraphics[width=0.75\textwidth]{((( nb.metadata["latex_metadata"]["cover_image"] )))}
+        \end{center}
+        \vfill
+    ((*- endif *))
+    ((*- endif *))
 
     \noindent
     \begin{tabular}{l l}
